@@ -1,12 +1,14 @@
-public static int cadastrarConta(Conta[] v, int tam) {
-        if (tam >= TAM_CONTAS) {
+public class Questao1 {
+
+    public static int cadastrarConta(Conta[] v, int tam) {
+        if (tam >= Util.TAM_CONTAS) {
             System.out.println("Vetor cheio! Não é possível cadastrar.");
             return tam;
         }
 
-        Conta nova = lerConta();
+        Conta nova = Util.lerConta();
 
-        if (buscaId(v, tam, nova.id) != -1) {
+        if (Util.buscaId(v, tam, nova.id) != -1) {
             System.out.println("Erro: já existe uma conta com esse ID.");
             return tam;
         }
@@ -19,3 +21,22 @@ public static int cadastrarConta(Conta[] v, int tam) {
         System.out.println("Conta cadastrada com sucesso!");
         return tam + 1;
     }
+
+    public static void main(String[] args) {
+        Conta[] contas = new Conta[Util.TAM_CONTAS];
+        int tam = 0;
+        String resp;
+
+        do {
+            tam = cadastrarConta(contas, tam);
+            System.out.println("Contas cadastradas: " + tam);
+            resp = Util.lerTexto("Cadastrar outra? (s/n): ");
+        } while (resp.equalsIgnoreCase("s"));
+
+        System.out.println("\n--- Contas no vetor ---");
+        for (int i = 0; i < tam; i++) {
+            System.out.println(contas[i].id + " | " + contas[i].cliente
+                    + " | saldo " + contas[i].saldo + " | limite " + contas[i].limite);
+        }
+    }
+}
