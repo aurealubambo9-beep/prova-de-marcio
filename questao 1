@@ -1,0 +1,21 @@
+public static int cadastrarConta(Conta[] v, int tam) {
+        if (tam >= TAM_CONTAS) {
+            System.out.println("Vetor cheio! Não é possível cadastrar.");
+            return tam;
+        }
+
+        Conta nova = lerConta();
+
+        if (buscaId(v, tam, nova.id) != -1) {
+            System.out.println("Erro: já existe uma conta com esse ID.");
+            return tam;
+        }
+        if (nova.saldo < 0 || nova.limite < 0) {
+            System.out.println("Erro: saldo e limite não podem ser negativos.");
+            return tam;
+        }
+
+        v[tam] = nova;
+        System.out.println("Conta cadastrada com sucesso!");
+        return tam + 1;
+    }
